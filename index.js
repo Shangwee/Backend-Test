@@ -1,7 +1,7 @@
 const fastify = require('fastify')({logger: true}) 
 const knex = require('knex');
 const route = require('./server/routes/product_route')
-const config = require('./knexfile.js');
+const config = require('./knexfile');
 
 // Load the database configuration
 const db = knex(config.development);

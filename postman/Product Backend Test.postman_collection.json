@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "4b06be40-c7ae-4282-9921-e4d749bd559b",
+		"name": "Product Backend Test",
+		"description": "This is a collection of tests for product service.\n\nBase URL: /api/v1/products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32265981"
+	},
+	"item": [
+		{
+			"name": "Get all product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				},
+				"description": "Retrieve all the products"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all product and paging",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products?page=2&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Retrieve all product with paging"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all product with searching",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products?searchTerm=t",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "searchTerm",
+							"value": "t"
+						}
+					]
+				},
+				"description": "Retrieve all product with search term"
+			},
+			"response": []
+		},
+		{
+			"name": "Get single product by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				},
+				"description": "Retrieve a single product with ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"5"
+					]
+				},
+				"description": "Delete product with ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Update product by ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Earbuds\",\r\n    \"category\": \"Electronics\",\r\n    \"price\": 49.99,\r\n    \"images\": [\r\n    \"https://cdn.dummyjson.com/product-images/1/1.jpg\",\r\n    \"https://cdn.dummyjson.com/product-images/1/1.jpg\",\r\n    \"https://cdn.dummyjson.com/product-images/1/1.jpg\"\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"1"
+					]
+				},
+				"description": "Update a particular product with ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Jeans\",\r\n    \"category\": \"Clothing\",\r\n    \"price\": 19.95,\r\n    \"images\": [\r\n        \"https://cdn.dummyjson.com/product-images/1/1.jpg\",\r\n        \"https://cdn.dummyjson.com/product-images/1/1.jpg\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				},
+				"description": "Create a new product"
+			},
+			"response": []
+		}
+	]
+}

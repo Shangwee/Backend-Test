@@ -59,18 +59,28 @@ exports.createProduct = async (newProduct) => {
 
 // Update a product by ID
 exports.updateProduct = async (id, productUpdates) => {
-  const updateSet = Object.entries(productUpdates)
-    .map(([key, value]) => `${key} = $${key}`)
-    .join(', ');
-  const query = `UPDATE products SET ${updateSet} WHERE id = $id RETURNING *`;
-
-  const params = { ...productUpdates, id };
-  const updatedProduct = await db.oneOrNone(query, params);
-  return updatedProduct;
+  id = parseInt(id);
+  const { name, category, price, images } = productUpdates;
+  const imagesString = JSON.stringify(images);
+  const query = 'UPDATE products SET name = $1, category = $2, price = $3, images = $4 WHERE id = $5 RETURNING *';
+  try {
+    const updatedProduct = await db.one(query, [name, category, price, imagesString, id]);
+    return updatedProduct;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw new Error('Failed to update product'); // Re-throw a generic error for the controller
+  }
 };
 
 // Delete a product by ID
 exports.deleteProduct = async (id) => {
-  const query = 'DELETE FROM products WHERE id = $id';
-  await db.none(query, { id });
+  id = parseInt(id);
+  const query = 'DELETE FROM products WHERE id = $1 RETURNING *';
+  try {
+    const deletedProduct = await db.one(query, [id]);
+    return deletedProduct;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw new Error('Failed to delete product'); // Re-throw a generic error for the controller
+  }
 };

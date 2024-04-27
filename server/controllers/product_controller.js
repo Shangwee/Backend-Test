@@ -16,7 +16,6 @@ exports.getAllProducts = async (req, reply) => {
 exports.getProductById = async (req, reply) => {
   try {
     const { id } = req.params; // Extract path parameter
-
     const product = await productsService.getProductById(id);
     if (!product) {
       reply.code(404).send({ message: 'Product not found' });
@@ -46,7 +45,6 @@ exports.updateProduct = async (req, reply) => {
   try {
     const { id } = req.params; // Extract path parameter
     const productUpdates = req.body; // Access product update data from request body
-
     const updatedProduct = await productsService.updateProduct(id, productUpdates);
     if (!updatedProduct) {
       reply.code(404).send({ message: 'Product not found' });
@@ -63,11 +61,10 @@ exports.updateProduct = async (req, reply) => {
 exports.deleteProduct = async (req, reply) => {
   try {
     const { id } = req.params; // Extract path parameter
-
     await productsService.deleteProduct(id);
-    reply.code(204).send(); // 204 No Content for successful deletion
+    reply.code(204).send(); // 204 No Content status code
   } catch (err) {
     console.error(err);
-    reply.code(500).send({ message: 'Internal Server Error' });
+    reply.code(500).send({ message: 'Internal Server Error' }); // 500 for generic server errors
   }
 };
