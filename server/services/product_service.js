@@ -61,6 +61,7 @@ exports.createProduct = async (newProduct) => {
 exports.updateProduct = async (id, productUpdates) => {
   id = parseInt(id);
   const { name, category, price, images } = productUpdates;
+  // Convert images to JSON string
   const imagesString = JSON.stringify(images);
   const query = 'UPDATE products SET name = $1, category = $2, price = $3, images = $4 WHERE id = $5 RETURNING *';
   try {

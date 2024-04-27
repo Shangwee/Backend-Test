@@ -1,9 +1,8 @@
-const Fastify = require('fastify');
 const productsController = require('../controllers/product_controller'); 
 
 module.exports = async function (fastify, options) {
   // Base path for product routes
-  const basePath = '/api/v1/products'; // Example with version prefix
+  const basePath = '/api/v1/products';
 
   // define default route
   fastify.get('/', async (request, reply) => {
