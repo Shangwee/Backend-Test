@@ -1,10 +1,12 @@
 const fastify = require('fastify')({logger: true}) 
-const route = require('./routes/product_route')
 const knex = require('knex');
-
+const route = require('./server/routes/product_route')
 const config = require('./knexfile.js');
+
+// Load the database configuration
 const db = knex(config.development);
 
+// Register the route
 fastify.register(route)
 
 async function runMigrationsAndSeeds() {

@@ -5,3 +5,5 @@ const Product = {
     price: Number,
     images: Array, // Array of image URLs
   };
+
+  

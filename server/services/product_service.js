@@ -1,7 +1,6 @@
 const db = require('../db/database');
 
 // Get all products with optional search and pagination
-
 exports.getAllProducts = async (searchTerm, page, pageSize) => {
   let query = 'SELECT * FROM products';
   const queryParams = [];
@@ -32,20 +31,30 @@ exports.getAllProducts = async (searchTerm, page, pageSize) => {
 
 // Get a product by ID
 exports.getProductById = async (id) => {
-  const query = 'SELECT * FROM products WHERE id = $id';
-  const product = await db.oneOrNone(query, { id });
-  return product;
+  id = parseInt(id);
+  const query = 'SELECT * FROM products WHERE id = $1';
+  try {
+    const product = await db.oneOrNone(query, [id]);
+    return product;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    throw new Error('Failed to retrieve product'); // Re-throw a generic error for the controller
+  }
 };
 
 // Create a new product
 exports.createProduct = async (newProduct) => {
-  // Build the query dynamically based on product properties
-  const fields = Object.keys(newProduct).join(', ');
-  const placeholders = fields.replace(/,/g, '$, ');
-  const query = `INSERT INTO products (${fields}) VALUES (${placeholders}) RETURNING *`;
-
-  const createdProduct = await db.one(query, newProduct);
-  return createdProduct;
+  let query = "insert into products (name, category, price, images) values ($1, $2, $3, $4) returning *";
+  const { name, category, price, images } = newProduct;
+  // Convert images to JSON string
+  const imagesString = JSON.stringify(images);
+  try {
+    const createdProduct = await db.one(query, [name, category, price, imagesString]);
+    return createdProduct;
+  } catch (error) {
+    console.error('Error creating product:', error);
+    throw new Error('Failed to create product'); // Re-throw a generic error for the controller
+  }
 };
 
 // Update a product by ID

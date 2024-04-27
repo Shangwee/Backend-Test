@@ -15,10 +15,10 @@ module.exports = {
       port: PG_PORT
     },
     migrations: {
-      directory: './db/migrations', // Path to migrations folder
+      directory: './server/db/migrations', // Path to migrations folder
     },
     seeds: {
-      directory: './db/seeds', // Path to seeds folder
+      directory: './server/db/seeds', // Path to seeds folder
     },
   },
 };

@@ -1,4 +1,4 @@
-const productsService = require('../services/product_service'); // Assuming a Products service
+const productsService = require('../services/product_service');
 
 // Function to retrieve all products with search and pagination
 exports.getAllProducts = async (req, reply) => {
@@ -12,6 +12,7 @@ exports.getAllProducts = async (req, reply) => {
   }
 };
 
+// Function to retrieve a product by ID
 exports.getProductById = async (req, reply) => {
   try {
     const { id } = req.params; // Extract path parameter
@@ -32,7 +33,6 @@ exports.getProductById = async (req, reply) => {
 exports.createProduct = async (req, reply) => {
   try {
     const newProduct = req.body; // Access product data from request body
-
     const createdProduct = await productsService.createProduct(newProduct);
     reply.code(201).send(createdProduct); // 201 Created status code
   } catch (err) {
